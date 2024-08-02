@@ -1,7 +1,7 @@
 import { Button, Card, CardBody, CardFooter, Progress } from '@nextui-org/react'
 import { useProfileConfig } from '@renderer/hooks/use-profile'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { calcTraffic } from '@renderer/utils/calc'
+import { calcTraffic, calcPercent } from '@renderer/utils/calc'
 import { IoMdRefresh } from 'react-icons/io'
 
 const ProfileCard: React.FC = () => {
@@ -50,14 +50,3 @@ const ProfileCard: React.FC = () => {
 }
 
 export default ProfileCard
-
-function calcPercent(
-  upload: number | undefined,
-  download: number | undefined,
-  total: number | undefined
-): number {
-  if (upload === undefined || download === undefined || total === undefined) {
-    return 100
-  }
-  return Math.round(((upload + download) / total) * 100)
-}
