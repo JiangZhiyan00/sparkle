@@ -6,7 +6,7 @@ interface Props {
   onCancel: () => void
   onConfirm: (script: string) => void
 }
-const PacEditorViewer: React.FC<Props> = (props) => {
+const PacEditorModal: React.FC<Props> = (props) => {
   const { script, onCancel, onConfirm } = props
   const [currData, setCurrData] = useState(script)
 
@@ -42,4 +42,4 @@ const PacEditorViewer: React.FC<Props> = (props) => {
   )
 }
 
-export default PacEditorViewer
+export default PacEditorModal
