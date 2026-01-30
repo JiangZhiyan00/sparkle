@@ -1,4 +1,4 @@
-name: Build
+name: Build_My
 permissions: write-all
 on:
   workflow_dispatch:
