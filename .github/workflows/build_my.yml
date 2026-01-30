@@ -323,6 +323,7 @@ jobs:
           fi
 
       - name: Update Version
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.version != ''
         run: |
           INPUT_VERSION="${{ github.event.inputs.version }}"
           CLEAN_VERSION=$(echo "$INPUT_VERSION" | sed 's/^v//')
