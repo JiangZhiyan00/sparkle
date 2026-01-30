@@ -135,7 +135,7 @@ export async function createProfile(item: Partial<ProfileItem>): Promise<Profile
   } as ProfileItem
   switch (newItem.type) {
     case 'remote': {
-      const { 'mixed-port': mixedPort = 7890 } = await getControledMihomoConfig()
+      const { 'mixed-port': mixedPort = 7900 } = await getControledMihomoConfig()
       if (!item.url) throw new Error('Empty URL')
       let res: AxiosResponse
       if (newItem.substore) {

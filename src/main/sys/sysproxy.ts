@@ -71,7 +71,7 @@ async function setSysProxy(onlyActiveDevice: boolean): Promise<void> {
   await startPacServer()
   const { sysProxy } = await getAppConfig()
   const { mode, host, bypass = defaultBypass, settingMode = 'exec' } = sysProxy
-  const { 'mixed-port': port = 7890 } = await getControledMihomoConfig()
+  const { 'mixed-port': port = 7900 } = await getControledMihomoConfig()
   const execFilePromise = promisify(execFile)
   const useService = process.platform === 'darwin' && settingMode === 'service'
 
