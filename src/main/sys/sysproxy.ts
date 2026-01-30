@@ -82,7 +82,7 @@ async function setSysProxy(onlyActiveDevice: boolean, useRegistry = false): Prom
   await startPacServer()
   const { sysProxy } = await getAppConfig()
   const { mode, host, bypass = defaultBypass, settingMode = 'exec' } = sysProxy
-  const { 'mixed-port': port = 7890 } = await getControledMihomoConfig()
+  const { 'mixed-port': port = 7900 } = await getControledMihomoConfig()
   const execFilePromise = promisify(execFile)
 
   switch (mode || 'manual') {

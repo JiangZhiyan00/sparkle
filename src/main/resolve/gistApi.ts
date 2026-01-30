@@ -9,7 +9,7 @@ interface GistInfo {
 }
 
 async function listGists(token: string): Promise<GistInfo[]> {
-  const { 'mixed-port': port = 7890 } = await getControledMihomoConfig()
+  const { 'mixed-port': port = 7900 } = await getControledMihomoConfig()
   const res = await axios.get('https://api.github.com/gists', {
     headers: {
       Accept: 'application/vnd.github+json',
@@ -29,7 +29,7 @@ async function listGists(token: string): Promise<GistInfo[]> {
 }
 
 async function createGist(token: string, content: string): Promise<void> {
-  const { 'mixed-port': port = 7890 } = await getControledMihomoConfig()
+  const { 'mixed-port': port = 7900 } = await getControledMihomoConfig()
   return await axios.post(
     'https://api.github.com/gists',
     {
@@ -55,7 +55,7 @@ async function createGist(token: string, content: string): Promise<void> {
 }
 
 async function updateGist(token: string, id: string, content: string): Promise<void> {
-  const { 'mixed-port': port = 7890 } = await getControledMihomoConfig()
+  const { 'mixed-port': port = 7900 } = await getControledMihomoConfig()
   return await axios.patch(
     `https://api.github.com/gists/${id}`,
     {

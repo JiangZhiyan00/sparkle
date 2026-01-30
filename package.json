@@ -1,13 +1,13 @@
 {
   "name": "sparkle",
-  "version": "1.26.3",
+  "version": "2.0.0",
   "description": "Sparkle",
   "main": "./out/main/index.js",
   "author": {
-    "name": "xishang0128",
-    "email": "xishang02@gmail.com"
+    "name": "jiangzhiyan00",
+    "email": "jiangzhiyan937@gmail.com"
   },
-  "homepage": "https://github.com/xishang0128/sparkle",
+  "homepage": "https://github.com/jiangzhiyan00/sparkle",
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
@@ -116,5 +116,5 @@
       "vite": "npm:rolldown-vite@^7.3.1"
     }
   },
-  "packageManager": "pnpm@10.15.0"
+  "packageManager": "pnpm@10.28.2"
 }
