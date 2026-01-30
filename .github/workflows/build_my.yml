@@ -246,7 +246,17 @@ jobs:
         env:
           API_KEY: ${{ secrets.ZHIPU_API_KEY }}
         run: |
-          TEXT=$(git log $(jq -r .version package.json)..HEAD --pretty=format:%s | grep -v '[0-9]\+\.[0-9]\+\.[0-9]\+$' | sed ':a;N;$!ba;s/\n/\\n/g')
+          VERSION=$(jq -r .version package.json)
+          # 尝试使用版本标签,如果不存在则使用最近的 20 个提交
+          if git rev-parse "v$VERSION" >/dev/null 2>&1; then
+            TEXT=$(git log "v$VERSION..HEAD" --pretty=format:%s | grep -v '[0-9]\+\.[0-9]\+\.[0-9]\+$' | sed ':a;N;$!ba;s/\n/\\n/g')
+          elif git rev-parse "$VERSION" >/dev/null 2>&1; then
+            TEXT=$(git log "$VERSION..HEAD" --pretty=format:%s | grep -v '[0-9]\+\.[0-9]\+\.[0-9]\+$' | sed ':a;N;$!ba;s/\n/\\n/g')
+          else
+            echo "Warning: No git tag found for version $VERSION, using last 20 commits"
+            TEXT=$(git log -20 --pretty=format:%s | grep -v '[0-9]\+\.[0-9]\+\.[0-9]\+$' | sed ':a;N;$!ba;s/\n/\\n/g')
+          fi
+
           QUESTION="Translate into Chinese:\n"""\n$TEXT\n""""
           PAYLOAD=$(cat <<EOF
           {
