@@ -72,7 +72,7 @@ export async function createOverride(item: Partial<OverrideItem>): Promise<Overr
   } as OverrideItem
   switch (newItem.type) {
     case 'remote': {
-      const { 'mixed-port': mixedPort = 7890 } = await getControledMihomoConfig()
+      const { 'mixed-port': mixedPort = 7900 } = await getControledMihomoConfig()
       if (!item.url) throw new Error('Empty URL')
       let res: AxiosResponse
       try {

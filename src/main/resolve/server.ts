@@ -54,7 +54,7 @@ export async function startPacServer(): Promise<void> {
   }
   const host = cHost || '127.0.0.1'
   let script = pacScript || defaultPacScript
-  const { 'mixed-port': port = 7890 } = await getControledMihomoConfig()
+  const { 'mixed-port': port = 7900 } = await getControledMihomoConfig()
   script = script.replaceAll('%mixed-port%', port.toString())
   pacPort = await findAvailablePort(10000)
   pacServer = http
@@ -101,7 +101,7 @@ export async function startSubStoreBackendServer(): Promise<void> {
     subStoreBackendDownloadCron = '',
     subStoreBackendUploadCron = ''
   } = await getAppConfig()
-  const { 'mixed-port': port = 7890 } = await getControledMihomoConfig()
+  const { 'mixed-port': port = 7900 } = await getControledMihomoConfig()
   if (!useSubStore) return
   if (!useCustomSubStore) {
     await stopSubStoreBackendServer()
@@ -144,7 +144,7 @@ export async function stopSubStoreBackendServer(): Promise<void> {
 }
 
 export async function downloadSubStore(): Promise<void> {
-  const { 'mixed-port': mixedPort = 7890 } = await getControledMihomoConfig()
+  const { 'mixed-port': mixedPort = 7900 } = await getControledMihomoConfig()
   const frontendDir = path.join(mihomoWorkDir(), 'sub-store-frontend')
   const backendPath = path.join(mihomoWorkDir(), 'sub-store.bundle.js')
   const tempDir = path.join(mihomoWorkDir(), 'temp')

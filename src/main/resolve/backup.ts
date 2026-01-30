@@ -1,5 +1,6 @@
 import { getAppConfig } from '../config'
 import dayjs from 'dayjs'
+import https from 'https'
 import AdmZip from 'adm-zip'
 import {
   appConfigPath,
@@ -36,7 +37,10 @@ export async function webdavBackup(): Promise<boolean> {
 
   const client = createClient(webdavUrl, {
     username: webdavUsername,
-    password: webdavPassword
+    password: webdavPassword,
+    httpsAgent: new https.Agent({
+      rejectUnauthorized: false
+    })
   })
   try {
     await client.createDirectory(webdavDir)
@@ -58,7 +62,10 @@ export async function webdavRestore(filename: string): Promise<void> {
 
   const client = createClient(webdavUrl, {
     username: webdavUsername,
-    password: webdavPassword
+    password: webdavPassword,
+    httpsAgent: new https.Agent({
+      rejectUnauthorized: false
+    })
   })
   const zipData = await client.getFileContents(`${webdavDir}/${filename}`)
   const zip = new AdmZip(zipData as Buffer)
@@ -76,7 +83,10 @@ export async function listWebdavBackups(): Promise<string[]> {
 
   const client = createClient(webdavUrl, {
     username: webdavUsername,
-    password: webdavPassword
+    password: webdavPassword,
+    httpsAgent: new https.Agent({
+      rejectUnauthorized: false
+    })
   })
   const files = await client.getDirectoryContents(webdavDir, { glob: '*.zip' })
   if (Array.isArray(files)) {
@@ -97,7 +107,10 @@ export async function webdavDelete(filename: string): Promise<void> {
 
   const client = createClient(webdavUrl, {
     username: webdavUsername,
-    password: webdavPassword
+    password: webdavPassword,
+    httpsAgent: new https.Agent({
+      rejectUnauthorized: false
+    })
   })
   await client.deleteFile(`${webdavDir}/${filename}`)
 }

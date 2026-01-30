@@ -499,7 +499,7 @@ ipcMain.on('customTray:close', () => {
 })
 
 export async function copyEnv(type: 'bash' | 'cmd' | 'powershell' | 'nushell'): Promise<void> {
-  const { 'mixed-port': mixedPort = 7890 } = await getControledMihomoConfig()
+  const { 'mixed-port': mixedPort = 7900 } = await getControledMihomoConfig()
   const { sysProxy } = await getAppConfig()
   const { host, bypass = [] } = sysProxy
   switch (type) {
