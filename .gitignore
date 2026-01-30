@@ -8,3 +8,4 @@ out
 *.log*
 .idea
 *.ttf
+pnpm-lock.yaml
