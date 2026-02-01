@@ -31,18 +31,24 @@ const ErrorFallback = ({ error }: FallbackProps): JSX.Element => {
         size="sm"
         variant="flat"
         className="ml-2"
-        onPress={() =>
-          navigator.clipboard.writeText('```\n' + error.message + '\n' + error.stack + '\n```')
-        }
+        onPress={() => {
+          const text =
+            '```\n' +
+            (error instanceof Error ? error.message : String(error)) +
+            '\n' +
+            ((error as any)?.stack ?? '') +
+            '\n```'
+          navigator.clipboard?.writeText(text)
+        }}
       >
         复制报错信息
       </Button>
 
-      <p className="my-2">{error.message}</p>
+      <p className="my-2">{error instanceof Error ? error.message : String(error)}</p>
 
       <details title="Error Stack">
         <summary>Error Stack</summary>
-        <pre>{error.stack}</pre>
+        <pre>{(error as any)?.stack}</pre>
       </details>
     </div>
   )

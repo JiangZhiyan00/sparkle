@@ -98,7 +98,7 @@ const GeneralConfig: React.FC = () => {
             }}
           >
             <Tab key="stable" title="正式版" />
-            <Tab key="beta" title="测试版" />
+            <Tab key="beta" title="测试版" isDisabled />
           </Tabs>
         </SettingItem>
 

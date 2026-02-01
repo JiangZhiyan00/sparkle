@@ -187,47 +187,47 @@ jobs:
             !dist/sparkle*blockmap*
             latest.yml
 
-  pre-release:
-    needs: [build]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+  # pre-release:
+  #   needs: [build]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
 
-      - name: Download Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: bin/
-          merge-multiple: true
+  #     - name: Download Artifacts
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         path: bin/
+  #         merge-multiple: true
 
-      - name: Create Changelog for Pre-release
-        run: |
-          git log -1 --pretty=format:"%s%n%b" > bin/changelog.md
+  #     - name: Create Changelog for Pre-release
+  #       run: |
+  #         git log -1 --pretty=format:"%s%n%b" > bin/changelog.md
 
-      - name: Delete current release assets
-        uses: 8Mi-Tech/delete-release-assets-action@main
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          tag: pre-release
-          deleteOnlyFromDrafts: false
+  #     - name: Delete current release assets
+  #       uses: 8Mi-Tech/delete-release-assets-action@main
+  #       with:
+  #         github_token: ${{ secrets.GITHUB_TOKEN }}
+  #         tag: pre-release
+  #         deleteOnlyFromDrafts: false
 
-      - name: Tag Repo
-        uses: richardsimko/update-tag@v1
-        with:
-          tag_name: pre-release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #     - name: Tag Repo
+  #       uses: richardsimko/update-tag@v1
+  #       with:
+  #         tag_name: pre-release
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Publish Prerelease
-        if: success()
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: pre-release
-          body_path: bin/changelog.md
-          files: |
-            bin/latest.yml
-            bin/dist/*
-          prerelease: true
+  #     - name: Publish Prerelease
+  #       if: success()
+  #       uses: softprops/action-gh-release@v2
+  #       with:
+  #         tag_name: pre-release
+  #         body_path: bin/changelog.md
+  #         files: |
+  #           bin/latest.yml
+  #           bin/dist/*
+  #         prerelease: true
 
   release:
     if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && github.event.inputs.version != '')
@@ -256,7 +256,7 @@ jobs:
         run: |
           # 获取上一个 tag
           PREVIOUS_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
-          
+
           if [ -z "$PREVIOUS_TAG" ]; then
             # 如果没有上一个 tag，获取最近 20 个提交
             echo "No previous tag found, using last 20 commits"
