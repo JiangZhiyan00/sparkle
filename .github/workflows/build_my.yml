@@ -329,7 +329,7 @@ jobs:
             echo "$CONTENT" | while IFS= read -r line; do
               if [ -n "$line" ]; then
                 # 移除行首的列表符号（*, -, •等）和空格
-                cleaned_line=$(echo "$line" | sed -E 's/^[*\-•[:space:]]+//')
+                cleaned_line=$(echo "$line" | sed 's/^[ \t]*[*\-•][ \t]*//')
                 [ -n "$cleaned_line" ] && echo " - $cleaned_line"
               fi
             done >> changelog.md
