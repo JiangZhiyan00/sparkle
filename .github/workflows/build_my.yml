@@ -7,14 +7,8 @@ on:
         description: 'Tag version to release'
         required: false
   push:
-    branches:
-      - dev
     tags:
       - v*
-    paths-ignore:
-      - 'README.md'
-      - '.github/ISSUE_TEMPLATE/**'
-      - '.github/workflows/issues.yml'
 
 jobs:
   build:
@@ -83,11 +77,9 @@ jobs:
           GIT_COMMIT_HASH=$(git rev-parse --short HEAD)
           VERSION=$(jq -r '.version' package.json)
 
-          if [ "${{ github.event.inputs.version }}" == "" ]; then
-            BASE_VERSION=$(echo $VERSION | awk -F. '{print $1"."$2"."$3+1}')
-            VERSION_PREFIX=${VERSION_PREFIX:-beta}
-            RELEASE_VERSION="${BASE_VERSION}-${VERSION_PREFIX}-${GIT_COMMIT_HASH}"
-          else
+          # 检查是否是 tag 触发或手动输入版本
+          if [ "${{ github.event.inputs.version }}" != "" ]; then
+            # 手动触发，使用输入的版本
             INPUT_VERSION="${{ github.event.inputs.version }}"
             CLEAN_VERSION=$(echo "$INPUT_VERSION" | sed 's/^v//')
             if [[ ! "$CLEAN_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
@@ -95,6 +87,15 @@ jobs:
               exit 1
             fi
             RELEASE_VERSION="$CLEAN_VERSION"
+          elif [[ "${{ github.ref }}" == refs/tags/v* ]]; then
+            # tag 触发，使用 tag 版本
+            TAG_VERSION="${{ github.ref }}"
+            RELEASE_VERSION="${TAG_VERSION#refs/tags/v}"
+          else
+            # 普通推送，生成 beta 版本
+            BASE_VERSION=$(echo $VERSION | awk -F. '{print $1"."$2"."$3+1}')
+            VERSION_PREFIX=${VERSION_PREFIX:-beta}
+            RELEASE_VERSION="${BASE_VERSION}-${VERSION_PREFIX}-${GIT_COMMIT_HASH}"
           fi
 
           jq --arg version "$RELEASE_VERSION" '.version = $version' package.json > tmp.json && mv tmp.json package.json
@@ -239,19 +240,30 @@ jobs:
           fetch-depth: '0'
           fetch-tags: 'true'
 
+      - name: Extract Tag Name
+        id: tag
+        run: |
+          if [ "${{ github.event.inputs.version }}" != "" ]; then
+            TAG_NAME="${{ github.event.inputs.version }}"
+          else
+            TAG_NAME="${GITHUB_REF#refs/tags/}"
+          fi
+          echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
+
       - name: Generate Changelog
         env:
           API_KEY: ${{ secrets.ZHIPU_API_KEY }}
         run: |
-          VERSION=$(jq -r .version package.json)
-          # 尝试使用版本标签,如果不存在则使用最近的 20 个提交
-          if git rev-parse "v$VERSION" >/dev/null 2>&1; then
-            TEXT=$(git log "v$VERSION..HEAD" --pretty=format:%s | grep -v '[0-9]\+\.[0-9]\+\.[0-9]\+$' | tr '\n' '|')
-          elif git rev-parse "$VERSION" >/dev/null 2>&1; then
-            TEXT=$(git log "$VERSION..HEAD" --pretty=format:%s | grep -v '[0-9]\+\.[0-9]\+\.[0-9]\+$' | tr '\n' '|')
-          else
-            echo "Warning: No git tag found for version $VERSION, using last 20 commits"
+          # 获取上一个 tag
+          PREVIOUS_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+          
+          if [ -z "$PREVIOUS_TAG" ]; then
+            # 如果没有上一个 tag，获取最近 20 个提交
+            echo "No previous tag found, using last 20 commits"
             TEXT=$(git log -20 --pretty=format:%s | grep -v '[0-9]\+\.[0-9]\+\.[0-9]\+$' | tr '\n' '|')
+          else
+            # 从上一个 tag 到当前 HEAD 的提交
+            TEXT=$(git log "${PREVIOUS_TAG}..HEAD" --pretty=format:%s | grep -v '[0-9]\+\.[0-9]\+\.[0-9]\+$' | tr '\n' '|')
           fi
 
           TEXT="${TEXT%|}"
@@ -351,14 +363,14 @@ jobs:
         uses: 8Mi-Tech/delete-release-assets-action@main
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ github.event.inputs.version != '' && github.event.inputs.version || github.ref }}
+          tag: ${{ steps.tag.outputs.tag_name }}
           deleteOnlyFromDrafts: false
 
       - name: Publish Release
         if: success()
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.event.inputs.version != '' && github.event.inputs.version || github.ref }}
+          tag_name: ${{ steps.tag.outputs.tag_name }}
           body_path: changelog.md
           files: |
             latest.yml
