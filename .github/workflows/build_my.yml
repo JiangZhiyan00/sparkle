@@ -172,12 +172,6 @@ jobs:
       #     fakeroot dpkg-deb -b workdir dist/sparkle-linux-${VERSION}-loongarch64.deb
       #     rm -rf workdir
 
-      - name: Create Changelog
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git log -1 --pretty=format:"%s%n%b" > changelog.md
-
       - name: Generate latest.yml
         shell: bash
         run: SKIP_CHANGELOG=1 pnpm updater
@@ -191,7 +185,6 @@ jobs:
             !dist/sparkle.app.plist
             !dist/sparkle*blockmap*
             latest.yml
-            changelog.md
 
   pre-release:
     needs: [build]
@@ -205,6 +198,10 @@ jobs:
         with:
           path: bin/
           merge-multiple: true
+
+      - name: Create Changelog for Pre-release
+        run: |
+          git log -1 --pretty=format:"%s%n%b" > bin/changelog.md
 
       - name: Delete current release assets
         uses: 8Mi-Tech/delete-release-assets-action@main
