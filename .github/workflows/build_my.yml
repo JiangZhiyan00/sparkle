@@ -352,8 +352,6 @@ jobs:
         run: |
           npm install -g pnpm
           SKIP_PREPARE=1 pnpm install
-          # 保存纯净的 changelog 用于 release 描述
-          cp changelog.md changelog-release.md
           pnpm updater
 
       - uses: actions/download-artifact@v4
@@ -373,7 +371,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.tag.outputs.tag_name }}
-          body_path: changelog-release.md
+          body_path: changelog.md
           files: |
             latest.yml
             bin/dist/*
