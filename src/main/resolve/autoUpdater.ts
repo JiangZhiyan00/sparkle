@@ -33,7 +33,10 @@ export async function checkUpdate(): Promise<AppVersion | undefined> {
     responseType: 'text'
   })
   const latest = parseYaml<AppVersion>(res.data)
-  const currentVersion = app.getVersion()
+  latest.version = latest.version.startsWith('v') ? latest.version : `v${latest.version}`
+  const currentVersion = app.getVersion().startsWith('v')
+    ? app.getVersion()
+    : `v${app.getVersion()}`
   if (latest.version !== currentVersion) {
     return latest
   } else {

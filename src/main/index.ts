@@ -519,7 +519,7 @@ export async function createWindow(appConfig?: AppConfig): Promise<void> {
             height: 49
           },
       autoHideMenuBar: true,
-      ...(process.platform === 'linux' ? { icon: icon } : {}),
+      icon: icon,
       webPreferences: {
         preload: join(__dirname, '../preload/index.js'),
         spellcheck: false,
