@@ -321,17 +321,13 @@ jobs:
             echo "Warning: AI translation failed, using original commit messages"
             echo '# 更新日志' > changelog.md
             echo "$TEXT" | tr '|' '\n' | while IFS= read -r line; do
-              [ -n "$line" ] && echo " - $line"
+              [ -n "$line" ] && echo "$line"
             done >> changelog.md
           else
             echo '# 更新日志' > changelog.md
             CONTENT=$(echo "$RESPONSE" | jq .choices[0].message.content -r)
             echo "$CONTENT" | while IFS= read -r line; do
-              if [ -n "$line" ]; then
-                # 移除行首的列表符号（*, -, •等）和空格
-                cleaned_line=$(echo "$line" | sed 's/^[ \t]*[*\-•][ \t]*//')
-                [ -n "$cleaned_line" ] && echo " - $cleaned_line"
-              fi
+              [ -n "$line" ] && echo "$line"
             done >> changelog.md
           fi
 
