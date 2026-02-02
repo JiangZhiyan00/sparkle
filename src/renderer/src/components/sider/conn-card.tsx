@@ -222,7 +222,7 @@ const drawSvg = async (upload: number, download: number): Promise<void> => {
   if (upload === currentUpload && download === currentDownload) return
   currentUpload = upload
   currentDownload = download
-  const svg = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 36"><image height="36" width="36" href="${trayIconBase64}"/><text x="144" y="15" font-size="18" font-family="PingFang SC" font-weight="bold" text-anchor="end">${calcTraffic(upload)}/s ↑</text><text x="144" y="34" font-size="18" font-family="PingFang SC" font-weight="bold" text-anchor="end">${calcTraffic(download)}/s ↓</text></svg>`
+  const svg = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 175 36"><image height="36" width="36" href="${trayIconBase64}"/><text x="175" y="15" font-size="18" font-family="PingFang SC" font-weight="bold" text-anchor="end">${calcTraffic(upload)}/s ↑</text><text x="175" y="34" font-size="18" font-family="PingFang SC" font-weight="bold" text-anchor="end">${calcTraffic(download)}/s ↓</text></svg>`
   const image = await loadImage(svg)
   window.electron.ipcRenderer.send('trayIconUpdate', image)
 }
@@ -233,7 +233,7 @@ const loadImage = (url: string): Promise<string> => {
     img.onload = (): void => {
       const canvas = document.createElement('canvas')
       const ctx = canvas.getContext('2d')
-      canvas.width = 160
+      canvas.width = 191
       canvas.height = 36
       ctx?.drawImage(img, 0, 0)
       const png = canvas.toDataURL('image/png')
