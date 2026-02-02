@@ -33,8 +33,8 @@ const AppearanceConfig: React.FC = () => {
   const { setTheme } = useTheme()
   const {
     useDockIcon = true,
-    showTraffic = false,
-    proxyInTray = true,
+    showTraffic = true,
+    proxyInTray = false,
     disableTray = false,
     showFloatingWindow: showFloating = false,
     spinFloatingIcon = true,

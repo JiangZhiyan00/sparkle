@@ -18,8 +18,8 @@ const GeoData: React.FC = () => {
   const {
     'geox-url': geoxUrlRaw,
     'geodata-mode': geoMode = false,
-    'geo-auto-update': geoAutoUpdate = false,
-    'geo-update-interval': geoUpdateInterval = 24
+    'geo-auto-update': geoAutoUpdate = true,
+    'geo-update-interval': geoUpdateInterval = 24 * 7
   } = controledMihomoConfig || {}
 
   const geoxUrl = useMemo(() => ({ ...defaultGeoxUrl, ...geoxUrlRaw }), [geoxUrlRaw])
