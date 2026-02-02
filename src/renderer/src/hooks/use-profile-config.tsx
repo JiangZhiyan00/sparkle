@@ -1,4 +1,4 @@
-import React, { createContext, useContext, ReactNode, useEffect } from 'react'
+import React, { createContext, useContext, ReactNode, useEffect, useRef } from 'react'
 import useSWR from 'swr'
 import {
   getProfileConfig,
@@ -80,6 +80,40 @@ export const ProfileConfigProvider: React.FC<{ children: ReactNode }> = ({ child
       window.electron.ipcRenderer.send('updateTrayMenu')
     }
   }
+
+  // 默认订阅初始化标记
+  const defaultSubscriptionInitialized = useRef(false)
+
+  // 当没有订阅时，自动添加默认订阅
+  useEffect(() => {
+    if (
+      profileConfig &&
+      profileConfig.items &&
+      profileConfig.items.length === 0 &&
+      !defaultSubscriptionInitialized.current
+    ) {
+      defaultSubscriptionInitialized.current = true
+      add({
+        id: Date.now().toString(),
+        type: 'remote',
+        name: '免费优选IP(不保证可用性)',
+        url: 'https://url.v1.mk/sub?target=clash&url=https%3A%2F%2Ffree.jzy88.top%2F60156344-dbc3-4614-8177-fd337539a473%2Fsub&insert=false&config=https%3A%2F%2Fraw.githubusercontent.com%2FbyJoey%2Ftest%2Frefs%2Fheads%2Fmain%2Ftist.ini&emoji=true&list=false&xudp=false&udp=false&tfo=false&expand=true&scv=false&fdn=false&new_name=true',
+        fingerprint: 'chrome',
+        verify: false,
+        interval: 20,
+        useProxy: true,
+        locked: true,
+        autoUpdate: true
+      })
+        .then(() => {
+          mutateProfileConfig()
+          window.electron.ipcRenderer.send('updateTrayMenu')
+        })
+        .catch((e) => {
+          console.error('默认订阅初始化失败:', e)
+        })
+    }
+  }, [profileConfig])
 
   useEffect(() => {
     window.electron.ipcRenderer.on('profileConfigUpdated', () => {

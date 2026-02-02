@@ -9,7 +9,7 @@ export const defaultConfig: AppConfig = {
   proxyInTray: true,
   trayProxyDelayLayout: 'new-line',
   useCustomTrayMenu: false,
-  maxLogDays: 7,
+  maxLogDays: 1,
   proxyCols: 'auto',
   connectionDirection: 'asc',
   connectionOrderBy: 'time',
@@ -34,8 +34,8 @@ export const defaultConfig: AppConfig = {
     'rule',
     'resource',
     'override',
-    'log',
-    'substore'
+    'log'
+    // 'substore'
   ],
   siderWidth: 250,
   sysProxy: { enable: false, mode: 'manual' },
@@ -68,10 +68,10 @@ export const defaultControledMihomoConfig: Partial<MihomoConfig> = {
   port: 0,
   'redir-port': 0,
   'tproxy-port': 0,
-  'allow-lan': false,
-  'unified-delay': false,
-  'tcp-concurrent': false,
-  'log-level': 'warning',
+  'allow-lan': true,
+  'unified-delay': true,
+  'tcp-concurrent': true,
+  'log-level': 'silent',
   'find-process-mode': 'always',
   'interface-name': '',
   'bind-address': '*',
@@ -143,8 +143,8 @@ export const defaultControledMihomoConfig: Partial<MihomoConfig> = {
     'store-selected': true,
     'store-fake-ip': true
   },
-  'geo-auto-update': false,
-  'geo-update-interval': 24,
+  'geo-auto-update': true,
+  'geo-update-interval': 24 * 7,
   'geodata-mode': false,
   'geox-url': {
     geoip: 'https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat',

@@ -29,8 +29,8 @@ import {
   restartService
 } from '@renderer/utils/ipc'
 import React, { useState, useEffect } from 'react'
-import ControllerSetting from '@renderer/components/mihomo/controller-setting'
-import EnvSetting from '@renderer/components/mihomo/env-setting'
+// import ControllerSetting from '@renderer/components/mihomo/controller-setting'
+// import EnvSetting from '@renderer/components/mihomo/env-setting'
 import AdvancedSetting from '@renderer/components/mihomo/advanced-settings'
 
 let systemCorePathsCache: string[] | null = null
@@ -60,12 +60,12 @@ const Mihomo: React.FC = () => {
   const { appConfig, patchAppConfig } = useAppConfig()
   const {
     core = 'mihomo',
-    maxLogDays = 7,
+    maxLogDays = 1,
     corePermissionMode = 'elevated',
     coreStartupMode = 'post-up'
   } = appConfig || {}
   const { controledMihomoConfig, patchControledMihomoConfig } = useControledMihomoConfig()
-  const { ipv6, 'log-level': logLevel = 'info' } = controledMihomoConfig || {}
+  const { ipv6, 'log-level': logLevel = 'silent' } = controledMihomoConfig || {}
 
   const [upgrading, setUpgrading] = useState(false)
   const [showGrantConfirm, setShowGrantConfirm] = useState(false)
@@ -416,8 +416,8 @@ const Mihomo: React.FC = () => {
         </SettingItem>
       </SettingCard>
       <PortSetting />
-      <ControllerSetting />
-      <EnvSetting />
+      {/* <ControllerSetting /> */}
+      {/* <EnvSetting /> */}
       <AdvancedSetting />
     </BasePage>
   )
