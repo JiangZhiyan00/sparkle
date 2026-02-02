@@ -528,7 +528,7 @@ const Connections: React.FC = () => {
           <Button
             size="sm"
             isIconOnly
-            className="app-nodrag"
+            className="app-nodrag ml-2"
             variant="light"
             title="连接设置"
             onPress={() => setIsSettingModalOpen(true)}
