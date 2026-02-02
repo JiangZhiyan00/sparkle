@@ -102,7 +102,11 @@ const Actions: React.FC = () => {
                   setChangelog(version.changelog)
                   setOpenUpdate(true)
                 } else {
-                  alert('当前已是最新版本，无需更新')
+                  if (process.platform === 'darwin') {
+                    alert('当前已是最新版本，无需更新')
+                  } else {
+                    new window.Notification('当前已是最新版本', { body: '无需更新' })
+                  }
                 }
               } catch (e) {
                 alert(e)
