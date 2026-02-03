@@ -152,6 +152,24 @@ jobs:
             pnpm build:mac --${{ matrix.arch }}
           fi
 
+      - name: Normalize Artifact Names with v Prefix
+        shell: bash
+        run: |
+          cd dist
+          VERSION=$(jq -r '.version' ../package.json)
+          # 如果 version 不是以 v 开头，重命名文件添加 v 前缀
+          if [[ ! "$VERSION" =~ ^v ]]; then
+            for file in *"$VERSION"*; do
+              if [ -f "$file" ]; then
+                newname="${file/$VERSION/v$VERSION}"
+                if [ "$file" != "$newname" ]; then
+                  mv "$file" "$newname"
+                  echo "Renamed: $file -> $newname"
+                fi
+              fi
+            done
+          fi
+
       # - name: Add Portable Flag
       #   if: matrix.os == 'windows-latest' && matrix.format == 'zip'
       #   shell: pwsh
