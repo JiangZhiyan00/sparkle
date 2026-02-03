@@ -15,7 +15,7 @@ const AdvancedSetting: React.FC = () => {
     'disable-keep-alive': disableKeepAlive = false,
     'find-process-mode': findProcessMode = 'always',
     'interface-name': interfaceName = '',
-    'client-fingerprint': clientFingerprint = '',
+    'client-fingerprint': clientFingerprint = 'chrome',
     'keep-alive-idle': idle = 15,
     'keep-alive-interval': interval = 15,
     profile = {},
