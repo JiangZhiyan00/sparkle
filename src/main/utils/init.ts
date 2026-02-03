@@ -157,7 +157,6 @@ async function migration(): Promise<void> {
     }
   }
 
-  // 清理已弃用的配置
   if (mihomoConfig['external-controller-pipe' as keyof MihomoConfig]) {
     mihomoConfigPatch['external-controller-pipe' as keyof MihomoConfig] = undefined as never
   }
