@@ -170,6 +170,9 @@ async function migration(): Promise<void> {
   if (mihomoConfig['external-controller'] === undefined) {
     mihomoConfigPatch['external-controller'] = ''
   }
+  if (mihomoConfig['global-client-fingerprint'] !== undefined) {
+    mihomoConfigPatch['global-client-fingerprint'] = undefined as never
+  }
 
   if (Object.keys(mihomoConfigPatch).length > 0) {
     await patchControledMihomoConfig(mihomoConfigPatch)
