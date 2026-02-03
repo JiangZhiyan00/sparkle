@@ -112,7 +112,22 @@ const UpdaterModal: React.FC<Props> = (props) => {
                   li: ({ children }) => <li className="list-disc list-inside">{children}</li>
                 }}
               >
-                {changelog}
+                {changelog
+                  .split('\n')
+                  .map((line) => {
+                    const trimmed = line.trim()
+                    // 保持标题行、空行、已有列表项不变
+                    if (
+                      !trimmed ||
+                      trimmed.startsWith('#') ||
+                      trimmed.startsWith('-') ||
+                      trimmed.startsWith('*')
+                    ) {
+                      return line
+                    }
+                    return `- ${trimmed}`
+                  })
+                  .join('\n')}
               </ReactMarkdown>
             </div>
           )}
