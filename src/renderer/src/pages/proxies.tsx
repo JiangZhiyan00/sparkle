@@ -84,7 +84,7 @@ const Proxies: React.FC = () => {
       }
       mutate()
     },
-    [autoCloseConnection, closeMode, mutate]
+    [autoCloseConnection, closeMode, closeMode, mutate]
   )
 
   const getDelayTestUrl = useCallback(
