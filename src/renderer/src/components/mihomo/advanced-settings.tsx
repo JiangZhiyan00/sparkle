@@ -3,18 +3,19 @@ import SettingCard from '../base/base-setting-card'
 import SettingItem from '../base/base-setting-item'
 import InterfaceSelect from '../base/interface-select'
 import { restartCore } from '@renderer/utils/ipc'
-import { Button, Input, Switch, Tab, Tabs, Tooltip } from '@heroui/react'
+import { Button, Input, Select, SelectItem, Switch, Tab, Tabs, Tooltip } from '@heroui/react'
 import { useState } from 'react'
 import { IoIosHelpCircle } from 'react-icons/io'
 
 const AdvancedSetting: React.FC = () => {
   const { controledMihomoConfig, patchControledMihomoConfig } = useControledMihomoConfig()
   const {
-    'unified-delay': unifiedDelay,
-    'tcp-concurrent': tcpConcurrent,
+    'unified-delay': unifiedDelay = true,
+    'tcp-concurrent': tcpConcurrent = true,
     'disable-keep-alive': disableKeepAlive = false,
     'find-process-mode': findProcessMode = 'always',
     'interface-name': interfaceName = '',
+    'client-fingerprint': clientFingerprint = '',
     'keep-alive-idle': idle = 15,
     'keep-alive-interval': interval = 15,
     profile = {},
