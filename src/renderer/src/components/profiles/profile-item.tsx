@@ -21,6 +21,7 @@ import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { openFile } from '@renderer/utils/ipc'
 import { useAppConfig } from '@renderer/hooks/use-app-config'
+import { DEFAULT_FREE_PROFILE } from '@renderer/hooks/use-profile-config'
 import ConfirmModal from '../base/base-confirm'
 import QRCodeModal from '../base/base-qrcode-modal'
 
@@ -41,6 +42,7 @@ interface MenuItem {
   showDivider: boolean
   color: 'default' | 'danger'
   className: string
+  disable?: boolean
 }
 
 const ProfileItem: React.FC<Props> = (props) => {
@@ -78,6 +80,8 @@ const ProfileItem: React.FC<Props> = (props) => {
   const [confirmOpen, setConfirmOpen] = useState(false)
   const [showQrCode, setShowQrCode] = useState(false)
 
+  const isDefaultFreeProfile = info.id === DEFAULT_FREE_PROFILE.id
+
   const menuItems: MenuItem[] = useMemo(() => {
     const list = [
       {
@@ -85,14 +89,16 @@ const ProfileItem: React.FC<Props> = (props) => {
         label: '编辑信息',
         showDivider: false,
         color: 'default',
-        className: ''
+        className: '',
+        disable: isDefaultFreeProfile
       } as MenuItem,
       {
         key: 'edit-file',
         label: '编辑文件',
         showDivider: false,
         color: 'default',
-        className: ''
+        className: '',
+        disable: isDefaultFreeProfile
       } as MenuItem,
       {
         key: 'open-file',
@@ -117,7 +123,8 @@ const ProfileItem: React.FC<Props> = (props) => {
         label: '删除',
         showDivider: false,
         color: 'danger',
-        className: 'text-danger'
+        className: 'text-danger',
+        disable: isDefaultFreeProfile
       } as MenuItem
     ]
     if (info.home) {
@@ -131,6 +138,10 @@ const ProfileItem: React.FC<Props> = (props) => {
     }
     return list
   }, [info])
+
+  const disabledMenuKeys = useMemo(() => {
+    return menuItems.filter((item) => item.disable).map((item) => item.key)
+  }, [menuItems])
 
   const onMenuAction = async (key: Key): Promise<void> => {
     switch (key) {
@@ -268,7 +279,7 @@ const ProfileItem: React.FC<Props> = (props) => {
                       />
                     </Button>
                   </DropdownTrigger>
-                  <DropdownMenu onAction={onMenuAction}>
+                  <DropdownMenu onAction={onMenuAction} disabledKeys={disabledMenuKeys}>
                     {menuItems.map((item) => (
                       <DropdownItem
                         showDivider={item.showDivider}
