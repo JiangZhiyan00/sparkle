@@ -84,15 +84,7 @@ const Proxies: React.FC = () => {
       }
       mutate()
     },
-    [autoCloseConnection, closeMode, closeMode, mutate]
-  )
-
-  const getDelayTestUrl = useCallback(
-    (group?: ControllerMixedGroup): string | undefined => {
-      if (delayTestUrlScope === 'global') return undefined
-      return group?.testUrl
-    },
-    [delayTestUrlScope]
+    [autoCloseConnection, closeMode, mutate]
   )
 
   const onProxyDelay = useCallback(
