@@ -32,6 +32,7 @@ const Proxies: React.FC = () => {
     closeMode = 'all',
     proxyCols = 'auto',
     delayTestUrlScope = 'group',
+    delayTestUrlScope = 'group',
     delayTestConcurrency = 50
   } = appConfig || {}
   const [cols, setCols] = useState(1)
@@ -84,13 +85,24 @@ const Proxies: React.FC = () => {
       }
       mutate()
     },
-    [autoCloseConnection, mutate]
+    [autoCloseConnection, closeMode, mutate]
+  )
+
+  const getDelayTestUrl = useCallback(
+    (group?: ControllerMixedGroup): string | undefined => {
+      if (delayTestUrlScope === 'global') return undefined
+      return group?.testUrl
+    },
+    [delayTestUrlScope]
   )
 
   const onProxyDelay = useCallback(
     async (proxy: string, group?: ControllerMixedGroup): Promise<ControllerProxiesDelay> => {
       return await mihomoProxyDelay(proxy, getDelayTestUrl(group))
+    async (proxy: string, group?: ControllerMixedGroup): Promise<ControllerProxiesDelay> => {
+      return await mihomoProxyDelay(proxy, getDelayTestUrl(group))
     },
+    [getDelayTestUrl]
     [getDelayTestUrl]
   )
 
@@ -114,6 +126,7 @@ const Proxies: React.FC = () => {
         const promise = Promise.resolve().then(async () => {
           try {
             await mihomoProxyDelay(proxy.name, getDelayTestUrl(groups[index]))
+            await mihomoProxyDelay(proxy.name, getDelayTestUrl(groups[index]))
           } catch {
             // ignore
           } finally {
@@ -136,6 +149,7 @@ const Proxies: React.FC = () => {
         return newDelaying
       })
     },
+    [allProxies, groups, delayTestConcurrency, mutate, getDelayTestUrl]
     [allProxies, groups, delayTestConcurrency, mutate, getDelayTestUrl]
   )
 
