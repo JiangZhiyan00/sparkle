@@ -121,8 +121,7 @@ const Proxies: React.FC = () => {
       for (const proxy of allProxies[index]) {
         const promise = Promise.resolve().then(async () => {
           try {
-            await mihomoProxyDelay(proxy.name, getDelayTestUrl(groups[index]))
-            await mihomoProxyDelay(proxy.name, getDelayTestUrl(groups[index]))
+            await mihomoProxyDelay(proxy.name, groups[index].testUrl)
           } catch {
             // ignore
           } finally {
