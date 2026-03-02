@@ -247,19 +247,19 @@ const ControllerSetting: React.FC = () => {
                     setExternalUiUrlInput(v.currentKey as string)
                   }}
                 >
-                  <SelectItem key="https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip">
+                  <SelectItem key="https://edgeone.gh-proxy.org/https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip">
                     zashboard
                   </SelectItem>
-                  <SelectItem key="https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip">
+                  <SelectItem key="https://edgeone.gh-proxy.org/https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip">
                     metacubexd
                   </SelectItem>
-                  <SelectItem key="https://github.com/MetaCubeX/Yacd-meta/archive/refs/heads/gh-pages.zip">
+                  <SelectItem key="https://edgeone.gh-proxy.org/https://github.com/MetaCubeX/Yacd-meta/archive/refs/heads/gh-pages.zip">
                     yacd-meta
                   </SelectItem>
-                  <SelectItem key="https://github.com/haishanh/yacd/archive/refs/heads/gh-pages.zip">
+                  <SelectItem key="https://edgeone.gh-proxy.org/https://github.com/haishanh/yacd/archive/refs/heads/gh-pages.zip">
                     yacd
                   </SelectItem>
-                  <SelectItem key="https://github.com/MetaCubeX/Razord-meta/archive/refs/heads/gh-pages.zip">
+                  <SelectItem key="https://edgeone.gh-proxy.org/https://github.com/MetaCubeX/Razord-meta/archive/refs/heads/gh-pages.zip">
                     razord-meta
                   </SelectItem>
                 </Select>
