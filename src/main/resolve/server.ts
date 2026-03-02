@@ -152,7 +152,7 @@ export async function downloadSubStore(): Promise<void> {
   try {
     // 下载后端文件
     const backendRes = await axios.get(
-      'https://github.com/sub-store-org/Sub-Store/releases/latest/download/sub-store.bundle.js',
+      'https://edgeone.gh-proxy.org/https://github.com/sub-store-org/Sub-Store/releases/latest/download/sub-store.bundle.js',
       {
         responseType: 'arraybuffer',
         headers: { 'Content-Type': 'application/octet-stream' },
@@ -169,7 +169,7 @@ export async function downloadSubStore(): Promise<void> {
 
     // 下载前端文件
     const frontendRes = await axios.get(
-      'https://github.com/sub-store-org/Sub-Store-Front-End/releases/latest/download/dist.zip',
+      'https://edgeone.gh-proxy.org/https://github.com/sub-store-org/Sub-Store-Front-End/releases/latest/download/dist.zip',
       {
         responseType: 'arraybuffer',
         headers: { 'Content-Type': 'application/octet-stream' },

@@ -17,9 +17,11 @@ let downloadCancelToken: CancelTokenSource | null = null
 export async function checkUpdate(): Promise<AppVersion | undefined> {
   const { 'mixed-port': mixedPort = 7900 } = await getControledMihomoConfig()
   const { updateChannel = 'stable' } = await getAppConfig()
-  let url = 'https://github.com/jiangzhiyan00/sparkle/releases/latest/download/latest.yml'
+  let url =
+    'https://edgeone.gh-proxy.org/https://github.com/jiangzhiyan00/sparkle/releases/latest/download/latest.yml'
   if (updateChannel == 'beta') {
-    url = 'https://github.com/jiangzhiyan00/sparkle/releases/download/pre-release/latest.yml'
+    url =
+      'https://edgeone.gh-proxy.org/https://github.com/jiangzhiyan00/sparkle/releases/download/pre-release/latest.yml'
   }
   const res = await axios.get(url, {
     headers: { 'Content-Type': 'application/octet-stream' },
@@ -50,7 +52,7 @@ export async function downloadAndInstallUpdate(version: string): Promise<void> {
   if (version.includes('beta')) {
     releaseTag = 'pre-release'
   }
-  const baseUrl = `https://github.com/jiangzhiyan00/sparkle/releases/download/${releaseTag}/`
+  const baseUrl = `https://edgeone.gh-proxy.org/https://github.com/jiangzhiyan00/sparkle/releases/download/${releaseTag}/`
   const fileMap = {
     'win32-x64': `sparkle-windows-${version}-x64-setup.exe`,
     'win32-arm64': `sparkle-windows-${version}-arm64-setup.exe`,

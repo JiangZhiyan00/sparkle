@@ -54,7 +54,8 @@ export const defaultConfig: AppConfig = {
 export const defaultControledMihomoConfig: Partial<MihomoConfig> = {
   'external-controller': '',
   'external-ui': '',
-  'external-ui-url': 'https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip',
+  'external-ui-url':
+    'https://edgeone.gh-proxy.org/https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip',
   'external-controller-cors': {
     'allow-origins': ['https://metacubex.github.io', 'https://board.zash.run.place'],
     'allow-private-network': false
@@ -147,10 +148,12 @@ export const defaultControledMihomoConfig: Partial<MihomoConfig> = {
   'geo-update-interval': 24 * 7,
   'geodata-mode': false,
   'geox-url': {
-    geoip: 'https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip-lite.dat',
-    geosite: 'https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat',
-    mmdb: 'https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.metadb',
-    asn: 'https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb'
+    geoip:
+      'https://edgeone.gh-proxy.org/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip-lite.dat',
+    geosite:
+      'https://edgeone.gh-proxy.org/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat',
+    mmdb: 'https://edgeone.gh-proxy.org/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.metadb',
+    asn: 'https://edgeone.gh-proxy.org/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb'
   }
 }
 
