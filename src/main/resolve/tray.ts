@@ -503,7 +503,9 @@ ipcMain.on('customTray:close', () => {
   hideCustomTray()
 })
 
-export async function copyEnv(type: 'bash' | 'cmd' | 'powershell' | 'nushell'): Promise<void> {
+export async function copyEnv(
+  type: 'bash' | 'fish' | 'cmd' | 'powershell' | 'nushell'
+): Promise<void> {
   const { 'mixed-port': mixedPort = 7900 } = await getControledMihomoConfig()
   const { sysProxy } = await getAppConfig()
   const { host, bypass = [] } = sysProxy
