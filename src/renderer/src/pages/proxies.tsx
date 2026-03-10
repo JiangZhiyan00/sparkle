@@ -98,10 +98,7 @@ const Proxies: React.FC = () => {
   const onProxyDelay = useCallback(
     async (proxy: string, group?: ControllerMixedGroup): Promise<ControllerProxiesDelay> => {
       return await mihomoProxyDelay(proxy, getDelayTestUrl(group))
-    async (proxy: string, group?: ControllerMixedGroup): Promise<ControllerProxiesDelay> => {
-      return await mihomoProxyDelay(proxy, getDelayTestUrl(group))
     },
-    [getDelayTestUrl]
     [getDelayTestUrl]
   )
 
