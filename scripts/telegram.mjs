@@ -5,8 +5,8 @@ const chat_id = '@MihomoPartyChannel'
 const pkg = readFileSync('package.json', 'utf-8')
 const changelog = readFileSync('changelog.md', 'utf-8')
 const { version } = JSON.parse(pkg)
-const downloadUrl = `https://github.com/mihomo-party-org/mihomo-party/releases/download/v${version}`
-let content = `<b>🌟 <a href="https://github.com/mihomo-party-org/mihomo-party/releases/tag/v${version}">Mihomo Party v${version}</a> 正式发布</b>\n\n`
+const downloadUrl = `https://edgeone.gh-proxy.org/https://github.com/mihomo-party-org/mihomo-party/releases/download/v${version}`
+let content = `<b>🌟 <a href="https://edgeone.gh-proxy.org/https://github.com/mihomo-party-org/mihomo-party/releases/tag/v${version}">Mihomo Party v${version}</a> 正式发布</b>\n\n`
 for (const line of changelog.split('\n')) {
   if (line.length === 0) {
     content += '\n'
