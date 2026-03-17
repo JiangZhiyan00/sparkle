@@ -515,6 +515,21 @@ const Connections: React.FC = () => {
             isIconOnly
             className="app-nodrag ml-2"
             variant="light"
+            title={paused ? '继续' : '暂停'}
+            onPress={() =>
+              setPaused((p) => {
+                pausedRef.current = !p
+                return !p
+              })
+            }
+          >
+            {paused ? <IoPlay className="text-lg" /> : <IoPause className="text-lg" />}
+          </Button>
+          <Button
+            size="sm"
+            isIconOnly
+            className="app-nodrag"
+            variant="light"
             title="连接设置"
             onPress={() => setIsSettingModalOpen(true)}
           >

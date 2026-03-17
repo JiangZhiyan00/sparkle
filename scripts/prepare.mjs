@@ -21,8 +21,8 @@ if (process.env.SKIP_PREPARE === '1') {
 
 /* ======= mihomo alpha======= */
 const MIHOMO_ALPHA_VERSION_URL =
-  'https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/version.txt'
-const MIHOMO_ALPHA_URL_PREFIX = `https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha`
+  'https://edgeone.gh-proxy.org/https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/version.txt'
+const MIHOMO_ALPHA_URL_PREFIX = `https://edgeone.gh-proxy.org/https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha`
 let MIHOMO_ALPHA_VERSION
 
 const MIHOMO_ALPHA_MAP = {
@@ -53,8 +53,8 @@ async function getLatestAlphaVersion() {
 
 /* ======= mihomo release ======= */
 const MIHOMO_VERSION_URL =
-  'https://github.com/MetaCubeX/mihomo/releases/latest/download/version.txt'
-const MIHOMO_URL_PREFIX = `https://github.com/MetaCubeX/mihomo/releases/download`
+  'https://edgeone.gh-proxy.org/https://github.com/MetaCubeX/mihomo/releases/latest/download/version.txt'
+const MIHOMO_URL_PREFIX = `https://edgeone.gh-proxy.org/https://github.com/MetaCubeX/mihomo/releases/download`
 let MIHOMO_VERSION
 
 const MIHOMO_MAP = {
@@ -251,32 +251,32 @@ async function downloadFile(url, path) {
 const resolveMmdb = () =>
   resolveResource({
     file: 'country.mmdb',
-    downloadURL: `https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country-lite.mmdb`
+    downloadURL: `https://edgeone.gh-proxy.org/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country-lite.mmdb`
   })
 const resolveMetadb = () =>
   resolveResource({
     file: 'geoip.metadb',
-    downloadURL: `https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.metadb`
+    downloadURL: `https://edgeone.gh-proxy.org/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.metadb`
   })
 const resolveGeosite = () =>
   resolveResource({
     file: 'geosite.dat',
-    downloadURL: `https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat`
+    downloadURL: `https://edgeone.gh-proxy.org/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat`
   })
 const resolveGeoIP = () =>
   resolveResource({
     file: 'geoip.dat',
-    downloadURL: `https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat`
+    downloadURL: `https://edgeone.gh-proxy.org/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat`
   })
 const resolveASN = () =>
   resolveResource({
     file: 'ASN.mmdb',
-    downloadURL: `https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb`
+    downloadURL: `https://edgeone.gh-proxy.org/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb`
   })
 const resolveEnableLoopback = () =>
   resolveResource({
     file: 'enableLoopback.exe',
-    downloadURL: `https://github.com/Kuingsmile/uwp-tool/releases/download/latest/enableLoopback.exe`
+    downloadURL: `https://edgeone.gh-proxy.org/https://github.com/Kuingsmile/uwp-tool/releases/download/latest/enableLoopback.exe`
   })
 const resolveSparkleService = () => {
   const map = {
@@ -297,14 +297,14 @@ const resolveSparkleService = () => {
 
   return resolveResource({
     file: `sparkle-service${ext}`,
-    downloadURL: `https://github.com/jiangzhiyan00/sparkle-service/releases/download/pre-release/${base}${ext}`,
+    downloadURL: `https://edgeone.gh-proxy.org/https://github.com/jiangzhiyan00/sparkle-service/releases/download/pre-release/${base}${ext}`,
     needExecutable: true
   })
 }
 const resolveRunner = () =>
   resolveResource({
     file: 'sparkle-run.exe',
-    downloadURL: `https://github.com/jiangzhiyan00/sparkle-run/releases/download/${arch}/sparkle-run.exe`
+    downloadURL: `https://edgeone.gh-proxy.org/https://github.com/jiangzhiyan00/sparkle-run/releases/download/${arch}/sparkle-run.exe`
   })
 
 const resolveMonitor = async () => {
@@ -314,7 +314,7 @@ const resolveMonitor = async () => {
     fs.mkdirSync(tempDir, { recursive: true })
   }
   await downloadFile(
-    `https://github.com/jiangzhiyan00/sparkle-run/releases/download/monitor/${arch}.zip`,
+    `https://edgeone.gh-proxy.org/https://github.com/jiangzhiyan00/sparkle-run/releases/download/monitor/${arch}.zip`,
     tempZip
   )
   const zip = new AdmZip(tempZip)
@@ -331,13 +331,13 @@ const resolveMonitor = async () => {
 const resolve7zip = () =>
   resolveResource({
     file: '7za.exe',
-    downloadURL: `https://github.com/develar/7zip-bin/raw/master/win/${arch}/7za.exe`
+    downloadURL: `https://edgeone.gh-proxy.org/https://github.com/develar/7zip-bin/raw/master/win/${arch}/7za.exe`
   })
 const resolveSubstore = () =>
   resolveResource({
     file: 'sub-store.bundle.js',
     downloadURL:
-      'https://github.com/sub-store-org/Sub-Store/releases/latest/download/sub-store.bundle.js'
+      'https://edgeone.gh-proxy.org/https://github.com/sub-store-org/Sub-Store/releases/latest/download/sub-store.bundle.js'
   })
 const resolveSubstoreFrontend = async () => {
   const tempDir = path.join(TEMP_DIR, 'substore-frontend')
@@ -346,7 +346,7 @@ const resolveSubstoreFrontend = async () => {
     fs.mkdirSync(tempDir, { recursive: true })
   }
   await downloadFile(
-    'https://github.com/sub-store-org/Sub-Store-Front-End/releases/latest/download/dist.zip',
+    'https://edgeone.gh-proxy.org/https://github.com/sub-store-org/Sub-Store-Front-End/releases/latest/download/dist.zip',
     tempZip
   )
   const zip = new AdmZip(tempZip)
@@ -390,8 +390,8 @@ const resolveFont = async () => {
     return
   }
   await downloadFile(
-    // 'https://github.com/googlefonts/noto-emoji/raw/main/fonts/NotoColorEmoji.ttf',
-    'https://github.com/Sav22999/emoji/raw/refs/heads/master/font/twemoji.ttf',
+    // 'https://edgeone.gh-proxy.org/https://github.com/googlefonts/noto-emoji/raw/main/fonts/NotoColorEmoji.ttf',
+    'https://edgeone.gh-proxy.org/https://github.com/Sav22999/emoji/raw/refs/heads/master/font/twemoji.ttf',
     targetPath
   )
 
