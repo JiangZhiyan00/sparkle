@@ -14,10 +14,10 @@ export const DEFAULT_FREE_PROFILE: Partial<ProfileItem> = {
   id: 'z8e7d6c5-b4a3-2019-8765-4321fedcba98',
   type: 'remote',
   name: '免费优选IP(不保证可用性)',
-  url: 'https://url.v1.mk/sub?target=clash&url=https%3A%2F%2Ffree.jzy88.top%2F60156344-dbc3-4614-8177-fd337539a473%2Fsub&insert=false&config=https%3A%2F%2Fraw.githubusercontent.com%2FbyJoey%2Ftest%2Frefs%2Fheads%2Fmain%2Ftist.ini&emoji=true&list=false&xudp=false&udp=false&tfo=false&expand=true&scv=false&fdn=false&new_name=true',
+  url: 'https://fuck.jzy88.top/sub?token=1f07ca0b1a4d1e41a585555240b579ad',
   verify: false,
-  interval: 20,
-  useProxy: false,
+  interval: 60,
+  useProxy: true,
   locked: true,
   autoUpdate: true
 }

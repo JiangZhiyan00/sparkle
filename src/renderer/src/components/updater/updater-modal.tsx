@@ -41,8 +41,8 @@ const UpdaterModal: React.FC<Props> = (props) => {
 
   const isDownloading = updateStatus?.downloading || downloading
   const releaseUrl = version.includes('beta')
-    ? 'https://github.com/xishang0128/sparkle/releases/tag/pre-release'
-    : `https://github.com/xishang0128/sparkle/releases/tag/${version}`
+    ? 'https://github.com/jiangzhiyan00/sparkle/releases/tag/pre-release'
+    : `https://github.com/jiangzhiyan00/sparkle/releases/tag/${version}`
 
   return (
     <Modal>
@@ -109,21 +109,21 @@ const UpdaterModal: React.FC<Props> = (props) => {
                     }}
                   >
                     {changelog
-                  .split('\n')
-                  .map((line) => {
-                    const trimmed = line.trim()
-                    // 保持标题行、空行、已有列表项不变
-                    if (
-                      !trimmed ||
-                      trimmed.startsWith('#') ||
-                      trimmed.startsWith('-') ||
-                      trimmed.startsWith('*')
-                    ) {
-                      return line
-                    }
-                    return `- ${trimmed}`
-                  })
-                  .join('\n')}
+                      .split('\n')
+                      .map((line) => {
+                        const trimmed = line.trim()
+                        // 保持标题行、空行、已有列表项不变
+                        if (
+                          !trimmed ||
+                          trimmed.startsWith('#') ||
+                          trimmed.startsWith('-') ||
+                          trimmed.startsWith('*')
+                        ) {
+                          return line
+                        }
+                        return `- ${trimmed}`
+                      })
+                      .join('\n')}
                   </ReactMarkdown>
                 </div>
               )}
